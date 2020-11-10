@@ -21,3 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['namespace' => 'Kk', 'prefix' => 'kk'], function (){
+    Route::group(['namespace' => 'Articles'], function (){
+        Route::resource('article/categories', 'ArticleCategoryController')->names('kk.article.categories');
+        Route::resource('article', 'ArticleController')->names('kk.article');
+    });
+});

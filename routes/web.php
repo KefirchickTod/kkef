@@ -20,3 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['namespace' => 'Kk', 'prefix' => 'kk'], function (){
+    Route::resource('article/categories', 'Articles\ArticleCategory')->names('kk.article.categories');
+});

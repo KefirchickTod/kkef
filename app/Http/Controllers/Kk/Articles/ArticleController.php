@@ -2,21 +2,38 @@
 
 namespace App\Http\Controllers\Kk\Articles;
 
-use App\Http\Controllers\Controller;
+
+use App\Http\Controllers\Kk\BasicController;
 use App\Http\Requests\Kk\ArticleCreateRequest;
 use App\Models\Kk\Article;
+use App\Repositories\Kk\Article\ArticleCategoriesRepository;
+use App\Repositories\Kk\Article\ArticleRepository;
 use Illuminate\Http\Request;
 
-class ArticleController extends Controller
+class ArticleController extends BasicController
 {
+
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var ArticleRepository
+     */
+    private $articleRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->articleRepository = app(ArticleRepository::class);
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+        $paginate = $this->articleRepository->getAllWithPaginate();
 
+        return view('kk.article.index', compact('paginate'));
     }
 
     /**
@@ -26,17 +43,29 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+
+        $categoryList = app(ArticleCategoriesRepository::class)->getForComBox();
+        return view('kk.article.create', compact('categoryList'));
     }
 
 
     /**
      * @param ArticleCreateRequest $request
-     * @return \Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ArticleCreateRequest $request)
     {
-        //
+
+        $data = $request->input();
+
+        $item = (new Article())->create($data);
+        if($item){
+            return redirect()
+                ->route('kk.article.edit', $item->id)->with(['success' => 'Success created']);
+        }
+        return back()
+            ->withInput()
+            ->withErrors(['msg' => 'Error of created']);
     }
 
     /**
@@ -50,15 +79,17 @@ class ArticleController extends Controller
         //
     }
 
+
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $item = $this->articleRepository->getEdit($id);
+        $categoryList = app(ArticleCategoriesRepository::class)->getForComBox();
+
+        return view('kk.article.edit', compact('item', 'categoryList'));
     }
 
     /**

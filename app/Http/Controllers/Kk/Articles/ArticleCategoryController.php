@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Kk\Articles;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kk\ArticleCategory;
 use Illuminate\Http\Request;
 
 class ArticleCategoryController extends Controller
@@ -14,7 +15,7 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        //
+       dd(ArticleCategory::all());
     }
 
     /**

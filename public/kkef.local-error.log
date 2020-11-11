@@ -1,0 +1,2 @@
+[Tue Nov 10 18:21:12.074129 2020] [core:error] [pid 5056:tid 1412] (20024)The given path is misformatted or contained invalid characters: [client 127.0.0.1:57382] AH00127: Cannot map GET /js/core/jquery.min.js%22 HTTP/1.1 to file, referer: http://kkef.local/login
+[Tue Nov 10 18:21:44.734132 2020] [core:error] [pid 5056:tid 1420] (20024)The given path is misformatted or contained invalid characters: [client 127.0.0.1:57404] AH00127: Cannot map GET /js/core/jquery.min.js%22 HTTP/1.1 to file, referer: http://kkef.local/login

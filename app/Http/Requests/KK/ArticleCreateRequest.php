@@ -24,7 +24,11 @@ class ArticleCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|min:3|unique:articles',
+            'slug' => 'max:200',
+            'full_text' => 'string|min:5',
+            'short_text' => 'string|min:5',
+            'category_id' => 'required|integer|exists:article_categories,id'
         ];
     }
 }

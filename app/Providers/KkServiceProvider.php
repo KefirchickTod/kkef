@@ -6,10 +6,10 @@ use App\Models\Kk\Article;
 use App\Observers\Kk\ArticleObserver;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class KkServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */
@@ -19,12 +19,14 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
     public function boot()
     {
-        Article::observe(ArticleObserver::class);
+       // Article::observe(ArticleObserver::class);
+
+
     }
 }

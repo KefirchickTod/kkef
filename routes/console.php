@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
+Artisan::command('inspire {name}', function () {
+    /** @var $this Illuminate\Foundation\Console\ClosureCommand */
+    $this->comment("Hello word ".$this->argument('name'));
 })->describe('Display an inspiring quote');

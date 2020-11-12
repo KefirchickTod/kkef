@@ -49,6 +49,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="card-footer">
+                    {{$paginate}}
+                </div>
             </div>
         </div>
     </div>
